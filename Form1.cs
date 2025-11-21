@@ -93,10 +93,11 @@ public partial class Form1 : Form
 
     /// <summary>
     /// Задава операцията, която да се изпълни върху числата.
+    /// Определя операцията въз основа на текста на бутона.
     /// Запазва първото число и маркира текстовото поле за изчистване.
     /// </summary>
-    /// <param name="operation">Операцията за задаване.</param>
-    private void SetOperation(Operation operation)
+    /// <param name="buttonText">Текстът на бутона за операция.</param>
+    private void SetOperation(string buttonText)
     {
         ClearTextBoxOnNextInput();
         if (_operation is not null)
@@ -105,9 +106,19 @@ public partial class Form1 : Form
         {
             return;
         }
-        _operation = operation;
+
+        _operation = buttonText switch
+        {
+            "+" => Operation.Addition,
+            "-" => Operation.Subtraction,
+            "*" or "×" => Operation.Multiplication,
+            "/" or "÷" => Operation.Division,
+            _ => throw new InvalidOperationException("Неизвестна операция")
+        };
+
         _clearTextBoxOnNextInput = true;
     }
+
     /// <summary>
     /// Обработва събитието при натискане на бутон за въвеждане на символ.
     /// Въвежда съответния символ в текстовото поле, чрез извикване на InputCharToTextBox.
@@ -157,34 +168,11 @@ public partial class Form1 : Form
             this.resultTextBox.Text = this.resultTextBox.Text.Substring(0, this.resultTextBox.Text.Length - 1);
         }
     }
-    /// <summary>
-    /// Обработва събитието при натискане на бутона за събиране.
-    /// </summary>
-    private void additionButton_Click(object sender, EventArgs e)
+    private void operationButton_Click(object sender, EventArgs e)
     {
-        SetOperation(Operation.Addition);
+        SetOperation(((Button)sender).Text);
     }
-    /// <summary>
-    /// Обработва събитието при натискане на бутона за изваждане.
-    /// </summary>
-    private void subtractionButton_Click(object sender, EventArgs e)
-    {
-        SetOperation(Operation.Subtraction);
-    }
-    /// <summary>
-    /// Обработва събитието при натискане на бутона за умножение.
-    /// </summary>
-    private void multiplicationButton_Click(object sender, EventArgs e)
-    {
-        SetOperation(Operation.Multiplication);
-    }
-    /// <summary>
-    /// Обработва събитието при натискане на бутона за деление.
-    /// </summary>
-    private void divisionButton_Click(object sender, EventArgs e)
-    {
-        SetOperation(Operation.Division);
-    }
+
     /// <summary>
     /// Обработва събитието при натискане на бутона за изчисление.
     /// Извършва зададената операция и показва резултата.

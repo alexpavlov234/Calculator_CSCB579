@@ -114,7 +114,7 @@ partial class Form1
         multiplicationButton.TabIndex = 15;
         multiplicationButton.Text = "×";
         multiplicationButton.UseVisualStyleBackColor = true;
-        multiplicationButton.Click += multiplicationButton_Click;
+        multiplicationButton.Click += operationButton_Click;
         // 
         // subtractionButton
         // 
@@ -128,7 +128,7 @@ partial class Form1
         subtractionButton.TabIndex = 16;
         subtractionButton.Text = "-";
         subtractionButton.UseVisualStyleBackColor = true;
-        subtractionButton.Click += subtractionButton_Click;
+        subtractionButton.Click += operationButton_Click;
         // 
         // additionButton
         // 
@@ -142,7 +142,7 @@ partial class Form1
         additionButton.TabIndex = 17;
         additionButton.Text = "+";
         additionButton.UseVisualStyleBackColor = true;
-        additionButton.Click += additionButton_Click;
+        additionButton.Click += operationButton_Click;
         // 
         // number7Button
         // 
@@ -352,7 +352,7 @@ partial class Form1
         divisionButton.TabIndex = 14;
         divisionButton.Text = "÷";
         divisionButton.UseVisualStyleBackColor = true;
-        divisionButton.Click += divisionButton_Click;
+        divisionButton.Click += operationButton_Click;
         // 
         // deleteButton
         // 
@@ -415,7 +415,7 @@ partial class Form1
         MaximumSize = new System.Drawing.Size(700, 500);
         MinimumSize = new System.Drawing.Size(320, 400);
         ShowIcon = false;
-        Text = "Calculator";
+        Text = "Калкулатор";
         tableLayoutPanel1.ResumeLayout(false);
         tableLayoutPanel2.ResumeLayout(false);
         tableLayoutPanel3.ResumeLayout(false);
