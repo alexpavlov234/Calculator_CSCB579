@@ -71,46 +71,12 @@ public partial class Form1 : Form
         _clearTextBoxOnNextInput = true;
     }
 
-    private void number0Button_Click(object sender, EventArgs e)
+    private void numberButton_Click(object sender, EventArgs e)
     {
-        InputCharToTextBox('0');
+        Button btn = (Button)sender;
+        InputCharToTextBox(btn.Text[0]);
     }
-    private void number1Button_Click(object sender, EventArgs e)
-    {
-        InputCharToTextBox('1');
-    }
-    private void number2Button_Click(object sender, EventArgs e)
-    {
-        InputCharToTextBox('2');
-    }
-    private void number3Button_Click(object sender, EventArgs e)
-    {
-        InputCharToTextBox('3');
-    }
-    private void number4Button_Click(object sender, EventArgs e)
-    {
-        InputCharToTextBox('4');
-    }
-    private void number5Button_Click(object sender, EventArgs e)
-    {
-        InputCharToTextBox('5');
-    }
-    private void number6Button_Click(object sender, EventArgs e)
-    {
-        InputCharToTextBox('6');
-    }
-    private void number7Button_Click(object sender, EventArgs e)
-    {
-        InputCharToTextBox('7');
-    }
-    private void number8Button_Click(object sender, EventArgs e)
-    {
-        InputCharToTextBox('8');
-    }
-    private void number9Button_Click(object sender, EventArgs e)
-    {
-        InputCharToTextBox('9');
-    }
+
     private void decimalPointButton_Click(object sender, EventArgs e)
     {
         InputCharToTextBox('.');
