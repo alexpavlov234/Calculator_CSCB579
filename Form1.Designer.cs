@@ -59,7 +59,6 @@ partial class Form1
         // resultTextBox
         // 
         resultTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
-        resultTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
         resultTextBox.Font = new System.Drawing.Font("Rubik", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)204));
         resultTextBox.Location = new System.Drawing.Point(12, 12);
         resultTextBox.Name = "resultTextBox";
@@ -115,6 +114,7 @@ partial class Form1
         multiplicationButton.TabIndex = 15;
         multiplicationButton.Text = "×";
         multiplicationButton.UseVisualStyleBackColor = true;
+        multiplicationButton.Click += multiplicationButton_Click;
         // 
         // subtractionButton
         // 
@@ -128,6 +128,7 @@ partial class Form1
         subtractionButton.TabIndex = 16;
         subtractionButton.Text = "-";
         subtractionButton.UseVisualStyleBackColor = true;
+        subtractionButton.Click += subtractionButton_Click;
         // 
         // additionButton
         // 
@@ -141,6 +142,7 @@ partial class Form1
         additionButton.TabIndex = 17;
         additionButton.Text = "+";
         additionButton.UseVisualStyleBackColor = true;
+        additionButton.Click += additionButton_Click;
         // 
         // number7Button
         // 
@@ -154,6 +156,7 @@ partial class Form1
         number7Button.TabIndex = 9;
         number7Button.Text = "7";
         number7Button.UseVisualStyleBackColor = true;
+        number7Button.Click += number7Button_Click;
         // 
         // number4Button
         // 
@@ -167,6 +170,7 @@ partial class Form1
         number4Button.TabIndex = 6;
         number4Button.Text = "4";
         number4Button.UseVisualStyleBackColor = true;
+        number4Button.Click += number4Button_Click;
         // 
         // number1Button
         // 
@@ -180,6 +184,7 @@ partial class Form1
         number1Button.TabIndex = 2;
         number1Button.Text = "1";
         number1Button.UseVisualStyleBackColor = true;
+        number1Button.Click += number1Button_Click;
         // 
         // number5Button
         // 
@@ -193,6 +198,7 @@ partial class Form1
         number5Button.TabIndex = 7;
         number5Button.Text = "5";
         number5Button.UseVisualStyleBackColor = true;
+        number5Button.Click += number5Button_Click;
         // 
         // number2Button
         // 
@@ -206,6 +212,7 @@ partial class Form1
         number2Button.TabIndex = 3;
         number2Button.Text = "2";
         number2Button.UseVisualStyleBackColor = true;
+        number2Button.Click += number2Button_Click;
         // 
         // clearButton
         // 
@@ -219,6 +226,7 @@ partial class Form1
         clearButton.TabIndex = 0;
         clearButton.Text = "C";
         clearButton.UseVisualStyleBackColor = true;
+        clearButton.Click += clearButton_Click;
         // 
         // number0Button
         // 
@@ -232,6 +240,7 @@ partial class Form1
         number0Button.TabIndex = 5;
         number0Button.Text = "0";
         number0Button.UseVisualStyleBackColor = true;
+        number0Button.Click += number0Button_Click;
         // 
         // number9Button
         // 
@@ -245,6 +254,7 @@ partial class Form1
         number9Button.TabIndex = 11;
         number9Button.Text = "9";
         number9Button.UseVisualStyleBackColor = true;
+        number9Button.Click += number9Button_Click;
         // 
         // number6Button
         // 
@@ -258,6 +268,7 @@ partial class Form1
         number6Button.TabIndex = 8;
         number6Button.Text = "6";
         number6Button.UseVisualStyleBackColor = true;
+        number6Button.Click += number6Button_Click;
         // 
         // number3Button
         // 
@@ -271,6 +282,7 @@ partial class Form1
         number3Button.TabIndex = 4;
         number3Button.Text = "3";
         number3Button.UseVisualStyleBackColor = true;
+        number3Button.Click += number3Button_Click;
         // 
         // decimalPointButton
         // 
@@ -282,8 +294,9 @@ partial class Form1
         decimalPointButton.Name = "decimalPointButton";
         decimalPointButton.Size = new System.Drawing.Size(60, 82);
         decimalPointButton.TabIndex = 12;
-        decimalPointButton.Text = ",";
+        decimalPointButton.Text = ".";
         decimalPointButton.UseVisualStyleBackColor = true;
+        decimalPointButton.Click += decimalPointButton_Click;
         // 
         // changeSignButton
         // 
@@ -297,6 +310,7 @@ partial class Form1
         changeSignButton.TabIndex = 18;
         changeSignButton.Text = "+/-";
         changeSignButton.UseVisualStyleBackColor = true;
+        changeSignButton.Click += changeSignButton_Click;
         // 
         // number8Button
         // 
@@ -310,6 +324,7 @@ partial class Form1
         number8Button.TabIndex = 10;
         number8Button.Text = "8";
         number8Button.UseVisualStyleBackColor = true;
+        number8Button.Click += number8Button_Click;
         // 
         // calculateButton
         // 
@@ -323,6 +338,7 @@ partial class Form1
         calculateButton.TabIndex = 13;
         calculateButton.Text = "=";
         calculateButton.UseVisualStyleBackColor = true;
+        calculateButton.Click += calculateButton_Click;
         // 
         // divisionButton
         // 
@@ -336,6 +352,7 @@ partial class Form1
         divisionButton.TabIndex = 14;
         divisionButton.Text = "÷";
         divisionButton.UseVisualStyleBackColor = true;
+        divisionButton.Click += divisionButton_Click;
         // 
         // deleteButton
         // 
@@ -349,6 +366,7 @@ partial class Form1
         deleteButton.TabIndex = 19;
         deleteButton.Text = "→";
         deleteButton.UseVisualStyleBackColor = true;
+        deleteButton.Click += deleteButton_Click;
         // 
         // tableLayoutPanel2
         // 
