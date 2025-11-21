@@ -9,127 +9,124 @@ public partial class Form1 : Form
     private decimal _num2;
     private Operation? _operation;
     private bool _clearTextBoxOnNextInput;
+    private readonly CultureInfo _cultureInfo = CultureInfo.InvariantCulture;
     public Form1()
     {
         InitializeComponent();
     }
+    private void ClearTextBoxOnNextInput()
+    {
+        if (!_clearTextBoxOnNextInput)
+            return;
+
+        this.resultTextBox.Text = "";
+        _clearTextBoxOnNextInput = false;
+    }
+    private void InputCharToTextBox(char symbol)
+    {
+        ClearTextBoxOnNextInput();
+        if (symbol == '.')
+        {
+            if (!resultTextBox.Text.Contains('.') && Regex.IsMatch(resultTextBox.Text, @"^(?:-?\d+)?$"))
+            {
+                this.resultTextBox.Text += ".";
+            }
+        }
+        else if (char.IsDigit(symbol))
+        {
+            this.resultTextBox.Text += symbol;
+        }
+
+    }
+
+    private bool TryParseNumber(string text, out decimal number)
+    {
+        number = 0;
+
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            MessageBox.Show("Моля, въведете число.", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+
+        if (!decimal.TryParse(text, NumberStyles.Any, _cultureInfo, out number))
+        {
+            MessageBox.Show("Невалидно число.", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+
+        return true;
+    }
+
+    private void SetOperation(Operation operation)
+    {
+        ClearTextBoxOnNextInput();
+        if (_operation is not null)
+            return;
+        if (!TryParseNumber(this.resultTextBox.Text, out _num1))
+        {
+            return;
+        }
+        _operation = operation;
+        _clearTextBoxOnNextInput = true;
+    }
+
     private void number0Button_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-        }
-        this.resultTextBox.Text += "0";
+        InputCharToTextBox('0');
     }
     private void number1Button_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-        }
-        this.resultTextBox.Text += "1";
+        InputCharToTextBox('1');
     }
     private void number2Button_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-        }
-        this.resultTextBox.Text += "2";
+        InputCharToTextBox('2');
     }
     private void number3Button_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-        }
-        this.resultTextBox.Text += "3";
+        InputCharToTextBox('3');
     }
     private void number4Button_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-        }
-        this.resultTextBox.Text += "4";
+        InputCharToTextBox('4');
     }
     private void number5Button_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-        }
-        this.resultTextBox.Text += "5";
+        InputCharToTextBox('5');
     }
     private void number6Button_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-        }
-        this.resultTextBox.Text += "6";
+        InputCharToTextBox('6');
     }
     private void number7Button_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-        }
-        this.resultTextBox.Text += "7";
+        InputCharToTextBox('7');
     }
     private void number8Button_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-        }
-        this.resultTextBox.Text += "8";
+        InputCharToTextBox('8');
     }
     private void number9Button_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-        }
-        this.resultTextBox.Text += "9";
+        InputCharToTextBox('9');
     }
     private void decimalPointButton_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-            return;
-        }
-        if (!resultTextBox.Text.Contains('.') && Regex.IsMatch(resultTextBox.Text, @"^(?:-?\d+)?$"))
-        {
-            this.resultTextBox.Text += ".";
-        }
-
+        InputCharToTextBox('.');
     }
     private void changeSignButton_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
+        ClearTextBoxOnNextInput();
+        if (!TryParseNumber(this.resultTextBox.Text, out decimal number))
         {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
             return;
         }
-        decimal.TryParse(this.resultTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal number);
         number *= -1;
 
-        this.resultTextBox.Text = number.ToString(CultureInfo.InvariantCulture);
+        this.resultTextBox.Text = number.ToString(_cultureInfo);
     }
+
     private void clearButton_Click(object sender, EventArgs e)
     {
         this.resultTextBox.Text = "";
@@ -140,11 +137,7 @@ public partial class Form1 : Form
     }
     private void deleteButton_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-        }
+        ClearTextBoxOnNextInput();
 
         if (!string.IsNullOrEmpty(this.resultTextBox.Text))
         {
@@ -153,89 +146,35 @@ public partial class Form1 : Form
     }
     private void additionButton_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-            return;
-        }
-        if (string.IsNullOrEmpty(this.resultTextBox.Text) || _operation is not null)
-            return;
-
-        decimal.TryParse(this.resultTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal numberFromTextBox);
-        _num1 = numberFromTextBox;
-        _operation = Operation.Addition;
-        _clearTextBoxOnNextInput = true;
-
+        SetOperation(Operation.Addition);
     }
-
-
     private void subtractionButton_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-            return;
-        }
-        if (string.IsNullOrEmpty(this.resultTextBox.Text) || _operation is not null)
-            return;
-
-        decimal.TryParse(this.resultTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal numberFromTextBox);
-        _num1 = numberFromTextBox;
-        _operation = Operation.Subtraction;
-        _clearTextBoxOnNextInput = true;
-
+        SetOperation(Operation.Subtraction);
     }
     private void multiplicationButton_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-            return;
-        }
-        if (string.IsNullOrEmpty(this.resultTextBox.Text) || _operation is not null)
-            return;
-
-        decimal.TryParse(this.resultTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal numberFromTextBox);
-        _num1 = numberFromTextBox;
-        _operation = Operation.Multiplication;
-        _clearTextBoxOnNextInput = true;
+        SetOperation(Operation.Multiplication);
     }
     private void divisionButton_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-            return;
-        }
-        if (string.IsNullOrEmpty(this.resultTextBox.Text) || _operation is not null)
-            return;
-
-        decimal.TryParse(this.resultTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal numberFromTextBox);
-        _num1 = numberFromTextBox;
-        _operation = Operation.Division;
-        _clearTextBoxOnNextInput = true;
+        SetOperation(Operation.Division);
     }
     private void calculateButton_Click(object sender, EventArgs e)
     {
-        if (_clearTextBoxOnNextInput)
-        {
-            this.resultTextBox.Text = "";
-            _clearTextBoxOnNextInput = false;
-            return;
-        }
-        if (string.IsNullOrEmpty(this.resultTextBox.Text) || _operation is null)
+        ClearTextBoxOnNextInput();
+        if (_operation is null)
         {
             return;
         }
 
-        decimal.TryParse(this.resultTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal numberFromTextBox);
-        _num2 = numberFromTextBox;
+        if (!TryParseNumber(this.resultTextBox.Text, out _num2))
+        {
+            return;
+        }
+        
         decimal result = 0;
-
+        
         if (_operation is Operation.Division && _num2 == 0)
         {
             this.resultTextBox.Text = "Грешка!";
@@ -245,23 +184,17 @@ public partial class Form1 : Form
             _clearTextBoxOnNextInput = true;
             return;
         }
-        switch (_operation)
+        
+        result = _operation switch
         {
-            case Operation.Addition:
-                result = _num1 + _num2;
-                break;
-            case Operation.Subtraction:
-                result = _num1 - _num2;
-                break;
-            case Operation.Multiplication:
-                result = _num1 * _num2;
-                break;
-            case Operation.Division:
-                result = _num1 / _num2;
-                break;
-        }
+            Operation.Addition => _num1 + _num2,
+            Operation.Subtraction => _num1 - _num2,
+            Operation.Multiplication => _num1 * _num2,
+            Operation.Division => _num1 / _num2,
+            _ => result
+        };
 
-        this.resultTextBox.Text = Math.Round(result, 10).ToString(CultureInfo.InvariantCulture);
+        this.resultTextBox.Text = Math.Round(result, 10).ToString(_cultureInfo);
         _num1 = 0;
         _num2 = 0;
         _operation = null;
